@@ -184,11 +184,11 @@
         color: var(--ink);
         transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
       }
-      .btn:hover {
-        background: var(--ink);
-        color: var(--sand);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 24px -10px rgba(20, 18, 16, 0.5);
+      .btn.solid:hover {
+        background: var(--bronze-l);
+        border-color: var(--bronze-l);
+        color: var(--ink) !important;
+        box-shadow: 0 10px 24px -10px rgba(171, 125, 64, 0.6);
       }
       .btn.solid {
         background: var(--bronze);
@@ -280,22 +280,45 @@
         height: 38px;
         font-size: 16px;
       }
+
       .moreflyout {
         position: relative;
       }
+
+      .moreflyout::after {
+        content: "";
+        position: absolute;
+        left: -10px;
+        right: -10px;
+        top: 100%;
+        height: 12px;
+      }
+
       .moreflyout .fly {
         position: absolute;
-        top: 28px;
+        top: calc(100% + 8px);
         right: 0;
         background: var(--ink2);
         border: 1px solid var(--line);
-        min-width: 200px;
+        min-width: 250px;
         display: none;
         flex-direction: column;
         padding: 8px 0;
+        z-index: 9999;
       }
-      .moreflyout:hover .fly {
+
+      .moreflyout:hover .fly,
+      .moreflyout:focus-within .fly {
         display: flex;
+      }
+
+      .moreflyout .fly a {
+        padding: 12px 20px;
+        white-space: nowrap;
+      }
+
+      .moreflyout .fly a:hover {
+        background: rgba(255, 255, 255, 0.06);
       }
       .moreflyout .fly a {
         padding: 9px 16px;
@@ -350,7 +373,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center center;
-        filter: grayscale(0.50) brightness(0.30);
+        filter: grayscale(0.5) brightness(0.3);
       }
       .hero::after {
         content: "";
@@ -962,6 +985,243 @@
         display: flex !important;
         flex-direction: column !important;
       }
+      .shop-nav {
+        color: var(--bronze-l) !important;
+        font-weight: 800 !important;
+        opacity: 1 !important;
+        position: relative;
+      }
+
+      .shop-nav::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        height: 2px;
+        background: var(--bronze-l);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.2s ease;
+      }
+
+      .shop-nav:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* Shop announcement bar */
+.shop-bar {
+  background: var(--bronze);
+  color: var(--ink);
+  border-top: 1px solid var(--bronze-l);
+  border-bottom: 1px solid var(--bronze-d);
+}
+
+.shop-bar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: 58px;
+  padding: 10px clamp(20px, 4vw, 48px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.shop-bar-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.shop-bar-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.shop-bar-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+
+  background: var(--ink);
+  color: var(--sand);
+
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+
+  border: 1px solid var(--ink);
+  transition: all 0.2s ease;
+}
+
+.shop-bar-btn:hover {
+  background: var(--sand);
+  color: var(--ink);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .shop-bar-inner {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    padding: 12px 20px;
+  }
+
+  .shop-bar-text {
+    font-size: 13px;
+  }
+
+  .shop-bar-btn {
+    padding: 7px 12px;
+  }
+}
+
+/* video gallery */
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.video-card {
+  background: var(--card);
+  border: 1px solid var(--line-dk);
+  overflow: hidden;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--bronze);
+  box-shadow: 0 14px 30px -18px rgba(20, 18, 16, 0.45);
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #111;
+  overflow: hidden;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+}
+
+.video-info h3 {
+  margin: 0;
+  font-family: "Libre Franklin", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.video-info span {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--bronze-d);
+}
+
+@media (max-width: 700px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.video-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--ink2);
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--bronze);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .25);
+}
+
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 18px;
+}
+
+.video-title {
+  color: var(--sand);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.video-year {
+  flex-shrink: 0;
+  color: var(--bronze-l);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+@media (max-width: 700px) {
+  .video-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .video-info {
+    padding: 14px 15px;
+  }
+}
     </style>
   </head>
   <body>
@@ -991,6 +1251,7 @@
           <a href="#events">Events</a>
           <a href="#gallery">Gallery</a>
           <a href="#visit">Visit</a>
+
           <div class="moreflyout">
             <a href="#hof">More ▾</a>
             <div class="fly">
@@ -1001,6 +1262,16 @@
               <a href="#contact">Contact</a>
             </div>
           </div>
+
+          <a
+            href="https://www.cafepress.com/shop/mbvgear"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="shop-nav"
+          >
+            Shop
+          </a>
+
           <a
             href="https://maps.google.com/?q=Muscle+Beach+Venice+CA"
             target="_blank"
@@ -1080,7 +1351,27 @@
         </div>
       </section>
 
-      <section id="experience">
+<!-- SHOP BAR -->
+<div class="shop-bar">
+  <div class="shop-bar-inner">
+    <span class="shop-bar-label">OFFICIAL MBV GEAR</span>
+
+    <span class="shop-bar-text">
+      Get your Muscle Beach Venice swag
+    </span>
+
+    <a
+      href="https://www.cafepress.com/shop/mbvgear"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="shop-bar-btn"
+    >
+      SHOP NOW →
+    </a>
+  </div>
+</div>
+
+<section id="experience"><section id="experience">
         <div class="wrap">
           <div class="label">The Experience</div>
           <h2
@@ -2239,55 +2530,106 @@
       </section>
 
       <section id="video">
-        <div class="wrap">
-          <div class="label">Video</div>
-          <h2 style="font-size: clamp(30px, 5vw, 50px)">The season, on film</h2>
-          <div style="margin-top: 20px">
-            <a
-              class="vrow"
-              href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
-              target="_blank"
-              rel="noopener"
-              ><div class="t">Muscle Beach Toy Drive</div>
-              <div class="y">2017 ↗</div></a
-            >
-            <a
-              class="vrow"
-              href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
-              target="_blank"
-              rel="noopener"
-              ><div class="t">Muscle Beach Championship — Labor Day</div>
-              <div class="y">2017 ↗</div></a
-            >
-            <a
-              class="vrow"
-              href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
-              target="_blank"
-              rel="noopener"
-              ><div class="t">Mr. &amp; Ms. Muscle Beach — July 4</div>
-              <div class="y">2017 ↗</div></a
-            >
-            <a
-              class="vrow"
-              href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
-              target="_blank"
-              rel="noopener"
-              ><div class="t">
-                Muscle Beach International Classic — Memorial Day
-              </div>
-              <div class="y">2017 ↗</div></a
-            >
-          </div>
-          <a
-            href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
-            target="_blank"
-            rel="noopener"
-            class="btn"
-            style="margin-top: 26px"
-            >Watch on YouTube</a
-          >
+  <div class="wrap">
+    <div class="label">Video</div>
+
+    <h2 style="font-size: clamp(30px, 5vw, 50px)">
+      The season, on film
+    </h2>
+
+    <div class="video-grid">
+
+      <!-- Muscle Beach Toy Drive -->
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/BYhZagiCm0U"
+            title="Muscle Beach Toy Drive — 2017"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
         </div>
-      </section>
+
+        <div class="video-info">
+          <div class="video-title">Muscle Beach Toy Drive</div>
+          <div class="video-year">2017</div>
+        </div>
+      </div>
+
+      <!-- Muscle Beach Championship -->
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/X32kcFnKq1I"
+            title="Muscle Beach Championship — Labor Day 2017"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="video-info">
+          <div class="video-title">
+            Muscle Beach Championship — Labor Day
+          </div>
+          <div class="video-year">2017</div>
+        </div>
+      </div>
+
+      <!-- Mr. & Ms. Muscle Beach -->
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/yHAy1NRLizI"
+            title="Mr. & Ms. Muscle Beach — July 4, 2017"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="video-info">
+          <div class="video-title">
+            Mr. &amp; Ms. Muscle Beach — July 4
+          </div>
+          <div class="video-year">2017</div>
+        </div>
+      </div>
+
+      <!-- Muscle Beach International Classic -->
+      <div class="video-card">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/P-nnjnYa_t0"
+            title="Muscle Beach International Classic — Memorial Day 2017"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="video-info">
+          <div class="video-title">
+            Muscle Beach International Classic — Memorial Day
+          </div>
+          <div class="video-year">2017</div>
+        </div>
+      </div>
+
+    </div>
+
+    <a
+      href="https://www.youtube.com/channel/UCgIs4OwLfKobj1gpO5n6KAg"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn"
+      style="margin-top: 26px"
+    >
+      Watch on YouTube
+    </a>
+  </div>
+</section>
 
       <section id="contact" class="dark">
         <div class="wrap">
